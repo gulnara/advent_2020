@@ -15,9 +15,6 @@ def count_trees(map)
 		end
 
 		item = map[i+1][current_counter]
-		puts i
-		puts current_counter
-		puts item
 
 		if item == tree
 			count += 1
