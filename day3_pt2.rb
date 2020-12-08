@@ -50,15 +50,10 @@ end
 def product_of_slopes(map)
 
 	a = count_trees(map, 1, 1)
-	puts a
 	b = count_trees(map, 3, 1)
-	puts b
 	c = count_trees(map, 5, 1)
-	puts c
 	d = count_trees(map, 7, 1)
-	puts d
 	e = skip_row_trees(map, 1, 2)
-	puts e
 
 	return a * b * c * d * e
 
