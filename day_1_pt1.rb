@@ -26,3 +26,4 @@ File.foreach("nums.txt") { |line| nums.append(line.to_i) }
 sum = 2020
 
 puts find_sum(nums, sum)
+# 111605670
