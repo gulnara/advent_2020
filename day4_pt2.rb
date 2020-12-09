@@ -13,28 +13,34 @@
 require 'set'
 
 def validate_passport(data)
-	valid_fields = {
-		"byr": [1920, 2002], 
-		"iyr": [2010, 2020], 
-		"eyr": [2020, 2030], 
-		"hgt": [
-			{"cm": [150, 193]}, 
-			{"in": [59, 76]}], 
-		"hcl": [6, [0,9], ["a","f"]], 
-		"ecl": ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"], 
-		"pid": 9]
-	split_data = Set.new(data.split(" ").map {|e| [e.split(":")]})
-	# puts split_data
-	valid_fields.each do |field|
-
-		if !split_data.include?(field)
+	split_data = Set.new(data.split(" ").map {|e| e.split(":")})
+	valid_fields = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
+	split_data.each do |field|
+		puts "#{field[0]}"
+		if !valid_field(field)
 			return false
+		else
+			valid_fields.delete(field[0])
 		end
 	end
-	return true
+
+	if valid_fields.length == 0
+		return true
+	else
+		return false
+	end
 end
 
-
+	# valid_fields = {
+	# 	"byr": [1920, 2002], 
+	# 	"iyr": [2010, 2020], 
+	# 	"eyr": [2020, 2030], 
+	# 	"hgt": [
+	# 		{"cm": [150, 193]}, 
+	# 		{"in": [59, 76]}], 
+	# 	"hcl": [6, [0,9], ["a","f"]], 
+	# 	"ecl": ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"], 
+	# 	"pid": 9]
 
 
 def count_valid_passports(parsed_data)
@@ -57,9 +63,9 @@ end
 # end
 
 
-parsed_data = File.read("passports.txt").split(/\n{2,}/)
+parsed_data = File.read("temp.txt").split(/\n{2,}/)
 # puts parsed_data
-puts count_valid_passports(parsed_data)
+count_valid_passports(parsed_data)
 
 
 
