@@ -113,7 +113,8 @@ def hcl_valid?(field)
 end
 
 def ecl_valid?(field)
-	if 
+	ecl = Set.new("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
+	if ecl.include?(field)
 		return true
 	else
 		return false
@@ -121,6 +122,7 @@ def ecl_valid?(field)
 end
 
 def pid_valid?(field)
+
 	if 
 		return true
 	else
