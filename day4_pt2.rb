@@ -105,11 +105,7 @@ def hgt_valid?(field)
 end
 
 def hcl_valid?(field)
-	if 
-		return true
-	else
-		return false
-	end
+	return !field.match(/\A[a-f0-9]*\z/).nil?
 end
 
 def ecl_valid?(field)
