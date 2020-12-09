@@ -35,7 +35,7 @@ def validate_field(field)
 	puts "#{field}"
 	flag = field[0]
 	field_data = field[1]
-	
+
 	case flag
 
 	when "byr"
@@ -67,7 +67,7 @@ end
 
 
 def byr_valid?(field)
-	if field[1].to_i >= 1920 or field[1].to_i <= 2002
+	if field[1].to_i >= 1920 and field[1].to_i <= 2002
 		return true
 	else
 		return false
@@ -76,7 +76,7 @@ end
 
 
 def iyr_valid?(field)
-	if field[1].to_i >= 2010 or field[1].to_i <= 2020
+	if field[1].to_i >= 2010 and field[1].to_i <= 2020
 		return true
 	else
 		return false
@@ -84,7 +84,7 @@ def iyr_valid?(field)
 end
 
 def eyr_valid?(field)
-	if field[1].to_i >= 2020 or field[1].to_i <= 2030
+	if field[1].to_i >= 2020 and field[1].to_i <= 2030
 		return true
 	else
 		return false
@@ -92,8 +92,12 @@ def eyr_valid?(field)
 end
 
 def hgt_valid?(field)
-	hgt = field[1]
-	if 
+	hgt = field.slice(0..-3).to_i
+	msrm = field[-2..-1]
+
+	if msrm == "cm" and hgt >= 150 and hgt <= 193
+		return true
+	elsif msrm == "in" and hgt >= 59 and hgt <= 76
 		return true
 	else
 		return false
