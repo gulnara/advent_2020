@@ -33,63 +33,96 @@ end
 
 def validate_field(field)
 	puts "#{field}"
-	case field[0]
+	flag = field[0]
+	field_data = field[1]
+	
+	case flag
 
 	when "byr"
-		puts "#{field[1]}"
-		if field[1].to_i >= 1920 or field[1].to_i <= 2002
-			return true
-		else
-			return false
-		end
+		puts "#{field_data}"
+		return byr_valid?(field_data)
 	when "iyr"
-		puts "#{field[1]}"
-		if field[1].to_i >= 2010 or field[1].to_i <= 2020
-			return true
-		else
-			return false
-		end
+		puts "#{field_data}"
+		return iyr_valid?(field_data)
 	when "eyr"
-		puts "#{field[1]}"
-		if field[1].to_i >= 2020 or field[1].to_i <= 2030
-			return true
-		else
-			return false
-		end
+		puts "#{field_data}"
+		return eyr_valid?(field_data)
 	when "hgt"
-		puts "#{field[1]}"
-		if field[1].to_i >= 1920 or field[1].to_i <= 2002
-			return true
-		else
-			return false
-		end
+		puts "#{field_data}"
+		hgt_valid?(field_data)
 	when "hcl"
-		puts "#{field[1]}"
-		if field[1].to_i >= 1920 or field[1].to_i <= 2002
-			return true
-		else
-			return false
-		end
+		puts "#{field_data}"
+		hcl_valid?(field_data)
 	when "ecl"
-		puts "#{field[1]}"
-		if field[1].to_i >= 1920 or field[1].to_i <= 2002
-			return true
-		else
-			return false
-		end
+		puts "#{field_data}"
+		ecl_valid?(field_data)
 	when "pid"
-		puts "#{field[1]}"
-		if field[1].to_i >= 1920 or field[1].to_i <= 2002
-			return true
-		else
-			return false
-		end
+		puts "#{field_data}"
+		pid_valid?(field_data)
 	else
 		puts "#{field}"
 		return true
 	end
 end
 
+
+def byr_valid?(field)
+	if field[1].to_i >= 1920 or field[1].to_i <= 2002
+		return true
+	else
+		return false
+	end
+end
+
+
+def iyr_valid?(field)
+	if field[1].to_i >= 2010 or field[1].to_i <= 2020
+		return true
+	else
+		return false
+	end
+end
+
+def eyr_valid?(field)
+	if field[1].to_i >= 2020 or field[1].to_i <= 2030
+		return true
+	else
+		return false
+	end
+end
+
+def hgt_valid?(field)
+	hgt = field[1]
+	if 
+		return true
+	else
+		return false
+	end
+end
+
+def hcl_valid?(field)
+	if 
+		return true
+	else
+		return false
+	end
+end
+
+def ecl_valid?(field)
+	if 
+		return true
+	else
+		return false
+	end
+end
+
+def pid_valid?(field)
+	if 
+		return true
+	else
+		return false
+	end
+end
 
 
 def count_valid_passports(parsed_data)
