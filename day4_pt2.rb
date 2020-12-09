@@ -119,7 +119,7 @@ end
 
 def pid_valid?(field)
 
-	if 
+	if !match(/\A[0-9]*\z/).nil? and field.length == 9
 		return true
 	else
 		return false
