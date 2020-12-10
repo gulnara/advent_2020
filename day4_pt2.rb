@@ -49,25 +49,27 @@ def validate_field(field)
 		return eyr_valid?(field_data)
 	when "hgt"
 		puts "#{field_data}"
-		hgt_valid?(field_data)
+		return hgt_valid?(field_data)
 	when "hcl"
 		puts "#{field_data}"
-		hcl_valid?(field_data)
+		return hcl_valid?(field_data)
 	when "ecl"
 		puts "#{field_data}"
-		ecl_valid?(field_data)
+		return ecl_valid?(field_data)
 	when "pid"
 		puts "#{field_data}"
-		pid_valid?(field_data)
+		return pid_valid?(field_data)
+	when "cid"
+		return true
 	else
 		puts "#{field}"
-		return true
+		return false
 	end
 end
 
 
 def byr_valid?(field)
-	if field[1].to_i >= 1920 and field[1].to_i <= 2002
+	if field.to_i >= 1920 and field.to_i <= 2002
 		return true
 	else
 		return false
@@ -76,7 +78,7 @@ end
 
 
 def iyr_valid?(field)
-	if field[1].to_i >= 2010 and field[1].to_i <= 2020
+	if field.to_i >= 2010 and field.to_i <= 2020
 		return true
 	else
 		return false
@@ -84,7 +86,7 @@ def iyr_valid?(field)
 end
 
 def eyr_valid?(field)
-	if field[1].to_i >= 2020 and field[1].to_i <= 2030
+	if field.to_i >= 2020 and field.to_i <= 2030
 		return true
 	else
 		return false
@@ -105,11 +107,19 @@ def hgt_valid?(field)
 end
 
 def hcl_valid?(field)
-	return !field.match(/\A[a-f0-9]*\z/).nil?
+	if field.slice(0) != "#"
+		return false
+	end
+
+	if !field.slice(1..).match(/\A[a-f0-9]*\z/).nil? and field.slice(1..).length == 6
+		return true
+	else
+		return false
+	end
 end
 
 def ecl_valid?(field)
-	ecl = Set.new("amb", "blu", "brn", "gry", "grn", "hzl", "oth")
+	ecl = Set.new(["amb", "blu", "brn", "gry", "grn", "hzl", "oth"])
 	if ecl.include?(field)
 		return true
 	else
@@ -118,8 +128,7 @@ def ecl_valid?(field)
 end
 
 def pid_valid?(field)
-
-	if !match(/\A[0-9]*\z/).nil? and field.length == 9
+	if !field.match(/\A[0-9]*\z/).nil? and field.length == 9
 		return true
 	else
 		return false
@@ -147,10 +156,9 @@ end
 # end
 
 
-parsed_data = File.read("temp.txt").split(/\n{2,}/)
-# puts parsed_data
-count_valid_passports(parsed_data)
-
+parsed_data = File.read("passports.txt").split(/\n{2,}/)
+puts count_valid_passports(parsed_data)
+# 158
 
 
 
