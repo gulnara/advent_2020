@@ -1,14 +1,12 @@
-[["light", "red", "1", "bright", "white", "2", "muted", "yellow"], ["dark", "orange", "3", "bright", "white", "4", "muted", "yellow"], ["bright", "white", "1", "shiny", "gold"], ["muted", "yellow", "2", "shiny", "gold", "9", "faded", "blue"], ["shiny", "gold", "1", "dark", "olive", "2", "vibrant", "plum"], ["dark", "olive", "3", "faded", "blue", "4", "dotted", "black"], ["vibrant", "plum", "5", "faded", "blue", "6", "dotted", "black"], ["faded", "blue", "no", "other"], ["dotted", "black", "no", "other"]]
-
-
-
 
 
 def count_bags(rules, key_bags)
 	count = 0
 
 	rules.each do |r|
+		# puts "#{r}"
 		key_bags.each do |b|
+			# puts "#{b}"
 			if r.include?(b)
 				count += 1
 			end
@@ -22,23 +20,28 @@ end
 def key_bags(gold_rules)
 	bags = []
 	gold_rules.each do |i|
-		if !i.empty? and i[1] != "gold"
-			bags.append(i[1])	
+		if !i.empty? and i[0] != "shinygold"
+			bags.append(i[0])
 		end
 	end
 	return bags
 end	
 
-
 def parse_rules(rule)
 	temp_arr = []
+	r = ""
+	digits = "0123456789"
 	rule.each do |i|
 		if i.include? "bag"
-			next
+			temp_arr.append(r)
+			r = ""
 		elsif i.include? "contain"
-			next
+			temp_arr.append(r)
+			r = ""
+		elsif digits.include? i
+			
 		else
-			temp_arr.append(i)
+			r = r + i
 		end
 	end
 	return temp_arr
@@ -48,7 +51,7 @@ end
 rules = []
 gold_rules = []
 
-File.foreach("temp.txt").each do |line|
+File.foreach("bags.txt").each do |line|
 	line_arr = line.split(" ")
 	sub_rule = []
 	gold_rule = []
@@ -66,6 +69,9 @@ end
 # puts "#{gold_rules}"
 
 key_bags = key_bags(gold_rules)
+# puts key_bags
+
+# clean_rules(rules)
 
 puts count_bags(rules, key_bags)
 
