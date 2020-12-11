@@ -1,30 +1,38 @@
 
 
-def count_bags(rules, key_bags)
+def count_bags(rules, key_bags, gold_count)
 	count = 0
 
 	rules.each do |r|
-		# puts "#{r}"
+		puts "#{r}"
 		key_bags.each do |b|
-			# puts "#{b}"
-			if r.include?(b)
-				count += 1
+			puts "#{b}"
+			r.each do |i|
+				if i == b
+					count += 1
+					# return
+				end
+			# if r.include?(b)
+			# 	count += 1
+			# 	puts count
 			end
 		end
 	end
 
-	return count
+	return count + gold_count
 end
 
 
 def key_bags(gold_rules)
 	bags = []
+	count = 0
 	gold_rules.each do |i|
 		if !i.empty? and i[0] != "shinygold"
 			bags.append(i[0])
+			count += 1
 		end
 	end
-	return bags
+	return bags, count
 end	
 
 def parse_rules(rule)
@@ -51,7 +59,7 @@ end
 rules = []
 gold_rules = []
 
-File.foreach("bags.txt").each do |line|
+File.foreach("temp.txt").each do |line|
 	line_arr = line.split(" ")
 	sub_rule = []
 	gold_rule = []
@@ -68,11 +76,11 @@ end
 
 # puts "#{gold_rules}"
 
-key_bags = key_bags(gold_rules)
+key_bags, gold_count = key_bags(gold_rules)
 # puts key_bags
 
 # clean_rules(rules)
 
-puts count_bags(rules, key_bags)
+puts count_bags(rules, key_bags, gold_count)
 
 
