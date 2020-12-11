@@ -1,58 +1,51 @@
-# light red bags contain 1 bright white bag, 2 muted yellow bags.
-# dark orange bags contain 3 bright white bags, 4 muted yellow bags.
-# bright white bags contain 1 shiny gold bag.
-# muted yellow bags contain 2 shiny gold bags, 9 faded blue bags.
-# shiny gold bags contain 1 dark olive bag, 2 vibrant plum bags.
-# dark olive bags contain 3 faded blue bags, 4 dotted black bags.
-# vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
-# faded blue bags contain no other bags.
-# dotted black bags contain no other bags.
+[["light", "red", "1", "bright", "white", "2", "muted", "yellow"], ["dark", "orange", "3", "bright", "white", "4", "muted", "yellow"], ["bright", "white", "1", "shiny", "gold"], ["muted", "yellow", "2", "shiny", "gold", "9", "faded", "blue"], ["shiny", "gold", "1", "dark", "olive", "2", "vibrant", "plum"], ["dark", "olive", "3", "faded", "blue", "4", "dotted", "black"], ["vibrant", "plum", "5", "faded", "blue", "6", "dotted", "black"], ["faded", "blue", "no", "other"], ["dotted", "black", "no", "other"]]
 
 
 
-rules = {
-	"red": {"white": 1, "yellow": 2},
-	"orange": {"white": 3, "yellow": 4},
-	"white": {"gold": 1},
-	"yellow": {"gold": 2, "blue": 9},
-	"gold": {"olive": 1, "plum": 2},
-	"olive": {"blue": 3, "black": 3},
-	"plum": {"blue": 5, "black": 6},
-	"blue": {},
-	"black": {}
-}
 
 
-rules = []
+def count_bags(rules)
+	rules.each do |r|
+		outter_b = r[1]
 
-File.foreach("temp.txt").each do |line|
-	line_arr = line.split(" ")
-	sub_rule = []
-	line_arr.each do |i|
+	end
+end
+
+def parse_rules(rule)
+	temp_arr = []
+	rule.each do |i|
 		if i.include? "bag"
 			next
 		elsif i.include? "contain"
 			next
 		else
-			sub_rule.append(i)
+			temp_arr.append(i)
 		end
 	end
-
-	rules.append(sub_rule)
-	# line_arr = line.split(" ")
-	
-	# for i in 0..(line_arr.length - 1)
-	# 	j = i + 1
-	# 	num = 0
-	# 	if line_arr[j].include?("bag")
-	# 		if !rules.key?(line_arr[i])
-	# 			rules[line_arr[i]] = num
-	# 		end
-	# 	elsif line_arr[i].include?("contain")
-	# 		num = line_arr[j]
-			
-
-
+	return temp_arr
 end
 
-puts "#{rules}"
+
+rules = []
+gold_rules = []
+
+File.foreach("temp.txt").each do |line|
+	line_arr = line.split(" ")
+	sub_rule = []
+	gold_rule = []
+
+	if line_arr.include? "gold"
+		gold_rule = parse_rules(line_arr)
+	else
+		sub_rule = parse_rules(line_arr)
+	end
+
+	gold_rules.append(gold_rule)
+	rules.append(sub_rule)
+end
+
+puts gold_rules	
+
+count_bags(rules)
+
+
