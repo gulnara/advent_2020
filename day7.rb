@@ -2,23 +2,11 @@
 
 def count_bags(rules, key_bags, gold_count)
 	count = 0
-
 	rules.each do |r|
-		puts "#{r}"
-		key_bags.each do |b|
-			puts "#{b}"
-			r.each do |i|
-				if i == b
-					count += 1
-					# return
-				end
-			# if r.include?(b)
-			# 	count += 1
-			# 	puts count
-			end
+		if (r & key_bags).any?
+			count += 1
 		end
 	end
-
 	return count + gold_count
 end
 
@@ -74,13 +62,8 @@ File.foreach("temp.txt").each do |line|
 	rules.append(sub_rule)
 end
 
-# puts "#{gold_rules}"
-
 key_bags, gold_count = key_bags(gold_rules)
-# puts key_bags
-
-# clean_rules(rules)
 
 puts count_bags(rules, key_bags, gold_count)
 
-
+# 39
