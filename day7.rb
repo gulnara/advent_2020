@@ -48,12 +48,12 @@ end
 rules = []
 gold_rules = []
 
-File.foreach("bags.txt").each do |line|
+File.foreach("temp.txt").each do |line|
 	line_arr = line.split(" ")
 	sub_rule = []
 	gold_rule = []
 
-	if line_arr.include? "gold"
+	if line_arr.include? "gold" and line_arr.include? "shiny"
 		gold_rule = parse_rules(line_arr)
 	else
 		sub_rule = parse_rules(line_arr)
