@@ -9,7 +9,6 @@ def acc_value(ops)
 
 	while !visited.include? i
 		o = ops[i][0]
-		# inc = ops[i][1].slice(1..).to_i
 		inc = ops[i][1].to_i
 		visited.append(i)
 		if o == "nop"
@@ -24,21 +23,39 @@ def acc_value(ops)
 		end
 	end
 
-	return acc
+	return acc, i
 
+end
+
+def replace_jmp(ops)
+
+	for o in 0..(ops.length - 1)
+		if ops[o][0] == "jmp"
+			new_ops = ops
+			new_ops[o][0] = "nop"
+			acc, i = acc_value(new_ops)
+			if i == ops.length + 1
+				return acc, i
+			end
+		end
+	end
 end
 
 
 ops = []
 
-File.foreach("operations.txt").each do |line|
+File.foreach("temp.txt").each do |line|
 	ops.append(line.split(" "))
 end
 
 # puts ops
 
-puts acc_value(ops)
+# puts acc_value(ops)
 # 1749
+
+puts replace_jmp(ops)
+
+
 
 
 
