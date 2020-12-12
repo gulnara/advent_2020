@@ -3,6 +3,8 @@
 def count_bags(rules, key_bags, gold_count)
 	count = 0
 	rules.each do |r|
+		puts "#{r}"
+		# this is the bug- assumes only 1 level of depth
 		if (r & key_bags).any?
 			count += 1
 		end
@@ -47,12 +49,12 @@ end
 rules = []
 gold_rules = []
 
-File.foreach("temp.txt").each do |line|
+File.foreach("bags.txt").each do |line|
 	line_arr = line.split(" ")
 	sub_rule = []
 	gold_rule = []
 
-	if line_arr.include? "gold" and line_arr.include? "shiny"
+	if line.include? "shiny gold"
 		gold_rule = parse_rules(line_arr)
 	else
 		sub_rule = parse_rules(line_arr)
@@ -62,8 +64,11 @@ File.foreach("temp.txt").each do |line|
 	rules.append(sub_rule)
 end
 
+# puts "#{gold_rules}"
+
 key_bags, gold_count = key_bags(gold_rules)
 
-puts count_bags(rules, key_bags, gold_count)
+puts "#{key_bags}"
 
+puts count_bags(rules, key_bags, gold_count)
 # 39
