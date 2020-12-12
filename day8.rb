@@ -1,7 +1,6 @@
 
 
 def acc_value(ops)
-	puts "got here"
 	acc = 0
 	i = 0
 
@@ -23,7 +22,6 @@ def acc_value(ops)
 				puts "something wrong"
 			end
 		else
-			puts "reached end"
 			return acc, i
 		end
 	end
@@ -37,15 +35,12 @@ def replace_jmp(ops)
 	map = {}
 
 	for o in 0..(ops.length - 1)
-		# puts ops[o]
 		if ops[o][0] == "jmp"
 			new_ops = ops
 			new_ops[o][0] = "nop"
-			puts "#{new_ops}"
 			acc, i = acc_value(new_ops)
 			map[i] = acc
 			new_ops[o][0] = "jmp"
-			puts map
 		end
 	end
 	return map
@@ -60,11 +55,9 @@ def replace_nop(ops)
 		if ops[o][0] == "nop"
 			new_ops = ops
 			new_ops[o][0] = "jmp"
-			puts "#{new_ops}"
 			acc, i = acc_value(new_ops)
 			map[i] = acc
 			new_ops[o][0] = "nop"
-			puts map
 		end
 	end
 	return map
@@ -85,7 +78,7 @@ File.foreach("operations.txt").each do |line|
 	ops.append(line.split(" "))
 end
 
-# puts ops
+
 
 # puts acc_value(ops)
 # 1749
