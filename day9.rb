@@ -43,10 +43,13 @@ end
 
 
 nums = []
-pream_length = 5
+pream_length = 25
 
-File.foreach("temp.txt").each do |line|
+File.foreach("day_9_input.txt").each do |line|
 	nums.append(line.to_i)
 end
 
 puts first_odd(nums, pream_length)
+# 41682220
+
+
