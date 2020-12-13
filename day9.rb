@@ -2,7 +2,18 @@
 
 def find_pair(pream, num)
 
-	
+	visited = {}
+
+	pream.each do |i|
+		diff = num - i
+		if visited.key?(i)
+			return true
+		else
+			visited[diff] = true
+		end
+	end
+
+	return false
 
 end
 
@@ -14,7 +25,7 @@ def first_odd(nums, pream_length)
 
 	nums.each do |num|
 
-		if pream.leangth < pream_length
+		if pream.length < pream_length
 			pream.append(num)
 		else
 			if find_pair(pream, num)
@@ -38,4 +49,4 @@ File.foreach("temp.txt").each do |line|
 	nums.append(line.to_i)
 end
 
-puts nums
+puts first_odd(nums, pream_length)
