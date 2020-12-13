@@ -34,10 +34,6 @@ def first_odd(nums, pream_length)
 	end
 end
 
-def calc_min_max()
-
-end
-
 def find_set(nums, odd_num)
 
 	set = []
