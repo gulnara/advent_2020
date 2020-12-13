@@ -1,7 +1,38 @@
 
 
+def find_pair(pream, num)
+
+	
+
+end
+
+
+def first_odd(nums, pream_length)
+
+	pream = []
+	map = {}
+
+	nums.each do |num|
+
+		if pream.leangth < pream_length
+			pream.append(num)
+		else
+			if find_pair(pream, num)
+
+				pream.shift
+				pream.append(num)
+			else
+				return num
+			end
+		end
+
+	end
+
+end
+
 
 nums = []
+pream_length = 5
 
 File.foreach("temp.txt").each do |line|
 	nums.append(line.to_i)
