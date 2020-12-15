@@ -1,13 +1,18 @@
 
 
 
-def can_occupy?(stack, row, i)
-
+def count_occupied(map)
+	count = 0
+	map.each do |i|
+		i.each do |j|
+			if j == "#"
+				count += 1
+			end
+		end
+	end
+	return count
 end
 
-def should_vacate?(r1, r2, r3, i)
-
-end
 
 def get_neighbours(map, r, c, width, length)
 
@@ -34,23 +39,32 @@ def scan_map(map)
 	length.times do
     new_map.push [nil] * width
   end
-	
-	for r in 0..(length - 1)
-		for c in 0..(width - 1)
-			neighbours = get_neighbours(map, r, c, width, length)
 
-			if map[r][c] == "L" and neighbours.none? "#"
-        new_map[r][c] = "#"
-      elsif map[r][c] == "#" and neighbours.count("#") >= 4
-        new_map[r][c] = "L"
-      else
-        new_map[r][c] = map[r][c]
-      end
+  current_occupied = 0
+	last_occupied = nil
+
+	until current_occupied == last_occupied
+  	last_occupied = current_occupied
+	
+		for r in 0..(length - 1)
+			for c in 0..(width - 1)
+				neighbours = get_neighbours(map, r, c, width, length)
+
+				if map[r][c] == "L" and neighbours.none? "#"
+	        new_map[r][c] = "#"
+	      elsif map[r][c] == "#" and neighbours.count("#") >= 4
+	        new_map[r][c] = "L"
+	      else
+	        new_map[r][c] = map[r][c]
+	      end
+			end
 		end
+
+		map = new_map
+		current_occupied = count_occupied(map)
 	end
 
-	puts map.length
-	return new_map.length
+	return current_occupied
 end
 
 seat_map = []
