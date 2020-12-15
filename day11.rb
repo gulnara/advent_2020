@@ -34,26 +34,29 @@ def scan_map(map)
 	seat_stack = []
 	width = map[0].length
 
+	new_map = []
+
 	
-	for i in 0..(map.length - 1)
-		j = i + 1
-
-
-
-	end
-
-
-	while k <= (seat_map.length - 1)
-		while a <= (seat_map[0].length - 1)
-			if seat_map[k][a] == "L" and (seat_map[l][a] == "L" or seat_map[l][a] == "." ) and (seat_map[l][b] == "L" or seat_map[l][b] == ".")
-				seat_map[k][a] = "#"
-				a += 1
-			elsif seat_map[k][a] == "."
+	for j in 0..(map.length - 1)
+		for i in 0..(width - 1)
+			if seat_stack.length < 3
+				seat_stack.append(map[j])
+				new_map.append(map[j])
+			else
+				if can_occupy?(seat_stack[0], seat_stack[1], seat_stack[2], i)
+					seat_stack[1][i] = "#"
+					new_map[j+1][i] = "#"
+				elsif should_vacate?(seat_stack[0], seat_stack[1], seat_stack[2], i)
+					seat_stack[1][i] = "L"
+					new_map[j+1][i] = "L"
+				end
+				seat_stack.shift
 			end
 		end
-		k += 1
+		j += 1
 	end
-	return seat_map
+
+	return new_map
 end
 
 seat_map = []
@@ -63,4 +66,5 @@ File.foreach("temp.txt") do |line|
 	seat_map.append(line)
 end
 
-puts scan_map(seat_map)
+puts "#{scan_map(seat_map)}"
+
