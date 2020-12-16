@@ -1,7 +1,7 @@
 
 $map = []
 
-File.foreach("temp.txt") do |line|
+File.foreach("day_11_input.txt") do |line|
 	line = line.split("")
 	if line[-1] == "\n"
 		line = line[0..-2]
