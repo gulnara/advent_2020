@@ -16,7 +16,6 @@ def count_occupied
 	count = 0
 	$map.each do |i|
 		i.each do |j|
-			puts j
 			if j == "#"
 				count += 1
 			end
@@ -71,6 +70,7 @@ until current_occupied == last_occupied
 	$map = new_map
 	current_occupied = count_occupied
 	puts current_occupied
+	# 2346
 end
 
 
